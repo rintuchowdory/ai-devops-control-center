@@ -51,11 +51,43 @@ function ShipCard({
       </div>
 
       <svg viewBox="0 0 120 60" className="w-full h-14">
+        <defs>
+          <linearGradient id={`water-${name}`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#0f2a3a" />
+            <stop offset="100%" stopColor="#050816" />
+          </linearGradient>
+        </defs>
+        <rect x="0" y="46" width="120" height="14" fill={`url(#water-${name})`} />
+        <motion.path
+          d="M0 46 Q 20 44 40 46 T 80 46 T 120 46"
+          fill="none"
+          stroke="#1c3e52"
+          strokeWidth="1"
+          animate={{ x: [0, -12, 0] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        <motion.ellipse
+          cx="60"
+          cy="47"
+          rx="30"
+          ry="3"
+          fill="none"
+          stroke="#1c3e52"
+          strokeWidth="1"
+          animate={
+            status === "running"
+              ? { rx: [18, 36, 18], opacity: [0.5, 0, 0.5] }
+              : { opacity: 0 }
+          }
+          transition={{ duration: 2.6, repeat: Infinity, ease: "easeOut" }}
+        />
+
         <motion.g
           animate={
             status === "crashed"
-              ? { rotate: 70, y: 14 }
-              : { y: [0, -3, 0] }
+              ? { rotate: 70, y: 20, opacity: 0.3 }
+              : { y: [0, -3, 0], rotate: 0, opacity: 1 }
           }
           transition={
             status === "crashed"
@@ -67,7 +99,12 @@ function ShipCard({
           <path d="M20 40 L100 40 L88 54 L32 54 Z" fill="var(--color-panel)" stroke="var(--color-docker)" strokeWidth="1.5" />
           <rect x="46" y="18" width="28" height="22" rx="2" fill="var(--color-docker-dim)" stroke="var(--color-docker)" strokeWidth="1.5" />
         </motion.g>
-        <line x1="0" y1="46" x2="120" y2="46" stroke="var(--color-line)" strokeWidth="1" />
+
+        {status === "crashed" && (
+          <motion.g initial={{ opacity: 0, scale: 0.4 }} animate={{ opacity: [0.9, 0], scale: 1.4 }} transition={{ duration: 0.8 }}>
+            <circle cx="60" cy="46" r="14" fill="none" stroke="var(--color-alert)" strokeWidth="1.5" />
+          </motion.g>
+        )}
       </svg>
 
       <button

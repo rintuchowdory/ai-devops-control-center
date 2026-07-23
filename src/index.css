@@ -10,21 +10,23 @@
 @import "@fontsource/jetbrains-mono/500.css";
 
 @theme {
-  --color-void: #070b14;
-  --color-panel: #0f1729;
-  --color-panel-2: #141d33;
-  --color-line: #223052;
+  --color-void: #050816;
+  --color-panel: #0f172a;
+  --color-panel-2: #161f38;
+  --color-line: #26314f;
   --color-fog: #7c89a6;
-  --color-mist: #b6c0d6;
+  --color-mist: #c3ccdf;
 
-  --color-k8s: #4cd4e8;
-  --color-k8s-dim: #1c5560;
-  --color-docker: #ff8a3d;
+  --color-k8s: #00e5ff;
+  --color-k8s-dim: #0a4a56;
+  --color-docker: #ff9d4d;
   --color-docker-dim: #6a3d1c;
-  --color-ai: #a78bfa;
-  --color-ai-dim: #45356f;
-  --color-signal: #34d399;
-  --color-alert: #f0556b;
+  --color-ai: #8b5cf6;
+  --color-ai-dim: #3a2a6b;
+  --color-magenta: #ff4ddb;
+  --color-signal: #22c55e;
+  --color-alert: #ef4444;
+  --color-warn: #f59e0b;
 
   --font-display: "Space Grotesk", sans-serif;
   --font-body: "Inter", sans-serif;
@@ -56,6 +58,33 @@ body {
 ::-webkit-scrollbar-thumb {
   background: var(--color-line);
   border-radius: 999px;
+}
+
+.glow-cyan {
+  filter: drop-shadow(0 0 6px rgba(0, 229, 255, 0.55));
+}
+.glow-purple {
+  filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.55));
+}
+.glow-magenta {
+  filter: drop-shadow(0 0 8px rgba(255, 77, 219, 0.5));
+}
+.glow-warn {
+  filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.6));
+}
+.glow-alert {
+  filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.65));
+}
+
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-3px, 2px); }
+  40% { transform: translate(3px, -2px); }
+  60% { transform: translate(-2px, -3px); }
+  80% { transform: translate(2px, 3px); }
+}
+.camera-shake {
+  animation: shake 0.4s ease-in-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
